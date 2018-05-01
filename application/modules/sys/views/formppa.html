@@ -1,0 +1,384 @@
+{% extends "layout.html" %} {% block content %}{% include "navigation.html" %}
+<div id="page-wrapper">
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Form Inputan</h1>
+            <div id="planit" style="height: 300px; margin-bottom: 20px;"></div>
+            <div id="lat"></div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Data Petugas Pintu Air </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <form role="form" method="post" id="myForm">
+        
+            <table style="padding: 1px; width: 100%; border: solid 0px #000000; font-size: 9pt; ">
+                <input type="hidden" value="" id="id"/>
+                    <tr>
+                        <input type="hidden" name="koor" id="koordinat" value="{{ ppa.koor }}" size="40">
+                        <td style="width: 50%; text-align: left;">Nama PPA   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="nama" id="nama" value="{{ ppa.nama }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Tempat   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="tempat" id="tempat" value="{{ ppa.tempat }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Tanggal Lahir   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="tglLahir" id="tglLahir" class="datepicker" value="{{ ppa.tglLahir }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Alamat   </td>
+                        <td style="width: 50%; text-align: left;">: <textarea name="alamat" id="alamat" rows="3" cols="41" value="{{ ppa.alamat }}"></textarea> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Lokasi Kerja   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="lokasiKerja" id="lokasiKerja" size="40" value="{{ ppa.lokasiKerja }}"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Nama Bangunan   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="namaBangunan" id="namaBangunan" value="{{ ppa.namaBangunan }}" size="40" > </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Ruas Saluran   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="ruasSaluran" id="ruasSaluran" value="{{ ppa.ruasSaluran }}" placeholder="Satuan Meter" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Nama Saluran   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="namaSaluran" id="namaSaluran" value="{{ ppa.namaSaluran }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Kejuron   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="kejuron" id="kejuron" value="{{ ppa.kejuron }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Pengamat   </td>
+                        <td style="width: 50%; text-align: left;">: <input type="text" name="pengamat" id="pengamat" value="{{ ppa.pengamat }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Seksi / UPTD   </td>
+                        <td style="width: 50%; text-align: left;">: <input name="seksi" id="seksi" value="{{ ppa.seksi }}" size="40"> </td>
+                    </tr>
+                    <br>
+                    <br>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Foto   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="foto" id="foto" type="file" value="{{ ppa.foto }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Gambar Lokasi 1   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="gambar1" id="gambar1" type="file" value="{{ ppa.gambar1 }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Gambar Lokasi 2   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="gambar2" id="gambar2" type="file" value="{{ ppa.gambar2 }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Gambar Lokasi 3   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="gambar3" id="gambar3" type="file" value="{{ ppa.gambar3 }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Gambar Lokasi 4   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="gambar4" id="gambar4" type="file" value="{{ ppa.gambar4 }}" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Gambar Lokasi 5   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="gambar5" id="gambar5" type="file" value="gambar5" size="40"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align: left;">Gambar Lokasi 6   </td>
+                        <td style="width: 50%; text-align: left;">   <input name="gambar6" id="gambar6" type="file" value="gambar6" size="40"> </td>
+                    </tr>
+            </table>
+            <!-- /.Penduduk -->
+
+    
+            <hr>
+            <button type="button" id="btnAdd" onclick="addData()" class="btn btn-primary " >Add</button>
+            <button type="button" id="btnUpdate" onclick="updateData()" class="btn btn-success">Update</button>
+    </form>
+</div>
+<!-- /#page-wrapper -->
+{% endblock %}
+
+{% block js %}
+
+
+   
+
+    <script>
+    var x = 12;
+    var y = 45;
+      p = planit.new({
+
+        container: 'planit',
+        image: {
+          url: '{{base_url}}assets/img/skema.jpg',
+          zoom: true,
+        },
+        markers: [
+          // {
+          //   coords: ['12','45'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dingle</h2><p>It's the dinkus.</p>",
+          //     position: 'top-left',
+          //     arrow: true
+          //   },
+          //   class: "cheese bucket",
+          //   color: "#CEA052",
+          //   size: 40
+          // },
+          // {
+          //   coords: ['45','62'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dangle</h2><p>It's the other dinkus.</p>",
+          //     position: 'bottom-left',
+          //     arrow: true
+          //   }
+          // },
+          // {
+          //   coords: ['64.21','22'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dangle</h2><p>It's the other dinkus.</p>",
+          //     position: 'top-right'
+          //   }
+          // },
+          // {
+          //   coords: ['64.21','72'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dangle</h2><p>It's the other dinkus.</p>",
+          //     position: 'bottom-right'
+          //   }
+          // }
+          // {
+          //   coords: ['12','45'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dingle</h2><p>It's the dinkus.</p>",
+          //     position: 'top',
+          //     arrow: true
+          //   },
+          //   class: "cheese bucket",
+          //   color: "#CEA052",
+          //   size: 40
+          // },
+          // {
+          //   coords: ['45','62'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dangle</h2><p>It's the other dinkus.</p>",
+          //     position: 'left',
+          //     arrow: true
+          //   }
+          // },
+          // {
+          //   coords: ['64.21','22'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dangle</h2><p>It's the other dinkus.</p>",
+          //     position: 'bottom',
+          //     arrow: true
+          //   }
+          // },
+          // {
+          //   coords: ['64.21','72'],
+          //   draggable: true,
+          //   infobox: {
+          //     html: "<h2>Dangle</h2><p>It's the other dinkus.</p>",
+          //     position: 'right',
+          //     arrow: true
+          //   }
+          // }
+        
+          {
+
+            coords: [x,y],
+            draggable: true,
+            infobox: {
+              html: "<p>Menandai</p>",
+              position: 'bottom-right',
+              arrow: false,
+              offsetX: -10,
+              offsetY: -10
+            },
+
+          }
+        ],
+        markerDragEnd: function(event, marker) {
+          console.log(marker.position());
+          document.getElementById("koordinat").value = marker.position();
+          // console.log(marker.coords());
+        },
+        markerClick: function(event, marker) {
+          // console.log(marker.position());
+          p.centerOn(marker.position());
+          setTimeout(marker.showInfobox, 50);
+          // console.log(marker.position());
+        },
+        canvasClick: function(event, coords) {
+          // console.log(coords);
+          // console.log(marker.coords());
+          p.zoomTo(0);
+        }
+      });
+
+      $(document).ready(function() { 
+
+        $('.datepicker').datepicker({
+                autoclose: true,
+                format: "yyyy-mm-dd",
+                todayHighlight: true,
+                orientation: "top auto",
+                todayBtn: true,
+                todayHighlight: true,  
+            });
+
+        var show = document.getElementById('namaBangunan').value;
+
+        if(show == "")
+        {
+            $('#btnAdd').add();
+            $('#btnUpdate').remove();
+        }
+        else
+        {
+            $('#btnAdd').remove();
+            $('#btnUpdate').add();
+        }
+});
+      
+          
+
+    function addData()
+    {
+        $('#btnAdd').text('Adding...'); //change button text
+        $('#btnAdd').attr('disabled',true); //set button disable 
+        var status = true;
+        var url = "{{ base_url }}main/Ppa/addData";
+        var namaBangunan = document.getElementById('namaBangunan').value;
+        
+        var formdata = new FormData();      
+        // append tipe file
+        var foto = $('#foto')[0].files[0];
+        formdata.append('foto', foto);
+
+        var gambar1 = $('#gambar1')[0].files[0];
+        formdata.append('gambar1', gambar1);
+
+        var gambar2 = $('#gambar2')[0].files[0];
+        formdata.append('gambar2', gambar2);
+
+        var gambar3 = $('#gambar3')[0].files[0];
+        formdata.append('gambar3', gambar3);
+
+        var gambar4 = $('#gambar4')[0].files[0];
+        formdata.append('gambar4', gambar4);
+
+        var gambar5 = $('#gambar5')[0].files[0];
+        formdata.append('gambar5', gambar5);
+
+        var gambar6 = $('#gambar6')[0].files[0];
+        formdata.append('gambar6', gambar6);
+
+        $.each($('#myForm').serializeArray(), function(a, b){
+            formdata.append(b.name, b.value);
+        });
+     
+        var formData = new FormData($('#myForm')[0]);
+        
+
+    if (status==true) {
+            // ajax adding data to database
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: "JSON",
+                success: function(data)
+                {
+
+                    if (data.status == true) { 
+                        alert("Menyimpan"); 
+                        window.location = "{{ base_url }}main/Ppa/listppa";
+                        
+                    }else{
+                        alert("Duplikat Kode!!, Cek Kembali Kode per Data"); 
+                        window.location = "{{ base_url }}main/Ppa/formppa";
+                    }
+                    $('#btnAdd').text('Add'); //change button text
+                    $('#btnAdd').attr('disabled',false); //set button enable 
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Gagal Menyimpan");
+                    $('#btnAdd').text('Add'); //change button text
+                    $('#btnAdd').attr('disabled',false); //set button enable 
+
+                }
+            });
+        }
+        else
+        {
+            $('#btnAdd').text('Add'); //change button text
+            $('#btnAdd').attr('disabled',false); //set button enable 
+        }
+    }
+
+    function updateData()
+    {
+        $('#btnUpdate').text('Updating...'); //change button text
+        $('#btnUpdate').attr('disabled',true); //set button disable 
+        var status = true;
+        var url = "{{ base_url }}main/PPA/updateData";
+
+    if (status==true) {
+            // ajax adding data to database
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#myForm').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+                    if (data.status) {
+                        alert("Menyimpan"); 
+                        window.location = "{{ base_url }}main/Ppa/listppa";
+                        
+                    }
+                    $('#btnUpdate').text('Update'); //change button text
+                    $('#btnUpdate').attr('disabled',false); //set button enable 
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Gagal Menyimpan");
+                    $('#btnUpdate').text('Update'); //change button text
+                    $('#btnUpdate').attr('disabled',false); //set button enable 
+
+                }
+            });
+        }
+        else
+        {
+            $('#btnUpdate').text('Update'); //change button text
+            $('#btnUpdate').attr('disabled',false); //set button enable 
+        }
+    }  
+            
+
+    </script>
+  
+
+{% endblock %}

@@ -1,0 +1,72 @@
+<header class="header" >
+            <!-- ============================================================= NAVBAR TOPBAR ============================================================= -->
+            <nav class="navbar navbar-top-bar navbar-static-top">
+                <div class="container">
+                    <ul class="navbar-nav nav">
+                        <li><a href="{{base_url}}main/Id/">Home</a></li>
+                        <li><a href="{{base_url}}main/Id/">About Us</a></li>
+                        <li><a href="{{base_url}}main/Id/">Customer Service</a></li>
+                        <li><a href="{{base_url}}main/Id/">Terms</a></li>
+                    </ul><!-- /.navbar-nav -->
+
+                    <ul class="navbar-nav nav navbar-right">
+                        <li><a href="#">Wishlist</a></li>
+                        {% if logs.kategori == 'user' %}
+
+                        <li><a href="{{base_url}}main/Member/logout">Logout</a></li>
+                        {% else  %}
+
+                        <li><a href="{{base_url}}main/Id/Checkout">Login</a></li>
+                        {% endif %}
+                        <li><a href="{{base_url}}main/Id/Checkout">Checkout</a></li>
+                        <li class="active"><a data-toggle="collapse" href="#my-cart">Total : Rp.{{totalHarga|number_format}}</a></li>
+                    </ul><!-- /.navbar-nav -->
+                </div><!-- /.container-->
+            </nav><!-- /.navbar-->
+            <!-- ============================================================= NAVBAR TOPBAR : END ============================================================= -->    <div class="yamm navbar navbar-default navbar-default-book animate-dropdown" role="navigation">
+            <div class="container">
+                <!-- ============================================================= NAVBAR PRIMARY ============================================================= -->
+
+                <div class="header-mast">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#KYbook-navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand" href="#">
+                        <img alt="logo" src="{{base_url}}assets/user/images/logo1.png" width="255.232px" height="66.132px"/>   
+                    </a>
+
+                    </div><!-- /.navbar-header -->
+                    <div class="collapse navbar-collapse" id="KYbook-navbar">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown yamm-fw active">
+                                <a href="{{base_url}}main/Kategori/kategori">Category</a>
+
+                            </li>
+                            <li class="hidden-sm"><a href="{{base_url}}main/Id/">New Books</a></li>
+                            <li  class="hidden-sm"><a href="{{base_url}}main/Id/">Best Seller</a></li>
+                            <li ><a href="{{base_url}}main/Id/Penerbit">Penerbit</a></li>
+                            <li class="dropdown">
+                                <!--<a href="category.html" data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle trigger">Pages <b class="caret"></b></a> -->
+                                <ul class="dropdown-menu pages-dropdown">
+                                    <li><a href="category.html">Category</a></li>
+                                    <li><a href="detail.html">Single Product</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="cart.html">Shopping Cart</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="404.html">404</a></li>
+                                </ul><!-- /.dropdown-menu -->
+                            </li> <!-- /.dropdown -->      
+                        </ul><!-- /.nav -->
+                    </div><!-- /.collapse -->
+                    <a href="#my-cart" class="navbar-btn btn btn-cart" data-toggle="collapse"><img src="{{base_url}}assets/user/images/shopping-cart.png" alt="" /><span class="badge-cart-items-count">{{jumlahData}}</span></a>
+                </div><!-- /.header-mast -->
+                <!-- ============================================================= NAVBAR PRIMARY : END ============================================================= -->           
+            </div><!-- /.container -->
+        </div><!-- /.yamm -->
+
+    </header><!-- /.header -->

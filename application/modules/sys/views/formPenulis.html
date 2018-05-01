@@ -1,0 +1,153 @@
+{% extends "layout.html" %} {% block content %}
+
+    <div class="content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Main Dashboard Chart -->
+                            <div class="block">
+                                <div class="block-header">
+                                    <ul class="block-options">
+                                        <li>
+                                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                        </li>
+                                    </ul>
+                                    <h3 class="block-title">Form Penulis</h3>
+                                </div>
+                                <div class="block-content block-content-full bg-gray-lighter ">
+                                      <form class="form-horizontal"  method="post" enctype="multipart/form-data" id="myForm">
+                                        <input type="hidden" name="id" value="{{data.id}}">
+                                       <div class="row form-group">
+                                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kode Penulis</label></div>
+                                            <div class="col-12 col-md-9"><input type="text" id="kodePenulis" name="kodePenulis" class="form-control" value="{{ data.kodePenulis }}"></div>
+                                        </div>
+                                       <div class="form-group">
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <button type="button" id="btnAdd" onclick="addData()" class="btn btn-primary " >Add</button>
+                                                <button type="button" id="btnUpdate" onclick="updateData()" class="btn btn-success">Update</button>
+                                                <button type="reset" class="btn btn-danger ">Reset</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END Main Dashboard Chart -->
+                        </div>
+                     
+                    </div>
+                  
+                </div>
+
+{% endblock %}
+
+{% block js %}
+
+    <script  type="text/javascript">         
+
+   $(document).ready(function() { 
+
+        $('.datepicker').datepicker({
+                autoclose: true,
+                format: "yyyy-mm-dd",
+                todayHighlight: true,
+                orientation: "top auto",
+                todayBtn: true,
+                todayHighlight: true,  
+            });
+
+        var show = document.getElementById('kodePenulis').value;
+
+        if(show == "")
+        {
+            $('#btnAdd').add();
+            $('#btnUpdate').remove();
+        }
+        else
+        {
+            $('#btnAdd').remove();
+            $('#btnUpdate').add();
+        }
+    });
+
+    function addData()
+    {
+        $('#btnAdd').text('Adding...'); //change button text
+        $('#btnAdd').attr('disabled',true); //set button disable 
+        var status = true;
+        var url = "{{ base_url }}sys/Penulis/addData";
+
+    if (status==true) {
+            // ajax adding data to database
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#myForm').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+                        alert("Menyimpan"); 
+                        window.location = "{{ base_url }}sys/Penulis/showData";
+                  
+                    $('#btnAdd').text('Add'); //change button text
+                    $('#btnAdd').attr('disabled',false); //set button enable 
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Gagal Menyimpan");
+                    $('#btnAdd').text('Add'); //change button text
+                    $('#btnAdd').attr('disabled',false); //set button enable 
+
+                }
+            });
+        }
+        else
+        {
+            $('#btnAdd').text('Add'); //change button text
+            $('#btnAdd').attr('disabled',false); //set button enable 
+        }
+    }
+
+    function updateData()
+    {
+        $('#btnUpdate').text('Updating...'); //change button text
+        $('#btnUpdate').attr('disabled',true); //set button disable 
+        var status = true;
+        var url = "{{ base_url }}sys/Penulis/updateData";
+
+    if (status==true) {
+            // ajax adding data to database
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#myForm').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+                    if (data.status) {
+                        alert("Menyimpan"); 
+                        window.location = "{{ base_url }}sys/Penulis/showData";
+                        
+                    }
+                    $('#btnUpdate').text('Update'); //change button text
+                    $('#btnUpdate').attr('disabled',false); //set button enable 
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert("Gagal Menyimpan");
+                    $('#btnUpdate').text('Update'); //change button text
+                    $('#btnUpdate').attr('disabled',false); //set button enable 
+
+                }
+            });
+        }
+        else
+        {
+            $('#btnUpdate').text('Update'); //change button text
+            $('#btnUpdate').attr('disabled',false); //set button enable 
+        }
+    }  
+            
+
+    </script>
+  
+
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends "layout.html" %} {% block content %} {% include "navigation.html" %}
+<style>
+    .hidden-div {
+        display:none
+    }
+    </style>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">List Data PPA</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="planit" style="height: 300px; margin-bottom: 20px;" ></div>
+            <div id="lat"></div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Datatable PPA
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama PPA</th>
+                                        <th>Tampat</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Alamat</th>
+                                        <th>Lokasi Kerja</th>
+                                        <th>Nama Bangunan</th>
+                                        <th>Ruas Saluran</th>
+                                        <th>Nama Saluran</th>
+                                        <th>Kejuron</th>
+                                        <th>Pengamat</th>
+                                        <th>Seksi/UPTD</th>
+                                        <th>Foto</th>
+                                        <th>Gambar 1</th>
+                                        <th>Gambar 2</th>
+                                        <th>Gambar 3</th>
+                                        <th>Gambar 4</th>
+                                        <th>Gambar 5</th>
+                                        <th>Gambar 6</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+    var saveMethod;
+    var tabel;
+    $(document).ready(function() {
+        tabel = $('#dataTables-example').DataTable({
+            "processing": true, //Feature control the processing indicator.
+            // "serverSide": true, //Feature control DataTables' server-side processing mode.
+            // "ordering": false, //Initial no order.
+            // Load data for the table's content from an Ajax source
+            "ajax": {
+                "url": "{{ base_url }}main/Ppa/listData",
+                "type": "POST"
+            },
+
+            //Set column definition initialisation properties.
+            "columnDefs": [
+                { 
+                    "targets": [ -1 ], //last column
+                    "orderable": false, //set not orderable
+                },
+                { 
+                    "targets": [ -2 ], //2 last column (photo)
+                    "orderable": false, //set not orderable
+                },
+            ],
+
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 
+                {
+                    extend:'pdf',
+                    exportOptions: {
+                        columns: ':visible',
+                    },
+                    download: 'open',
+                    customize: function (doc) {
+                        doc.content[1].table.widths = 
+                            Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                      }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible',
+                    }
+                }, 
+                'pageLength', 'colvis'
+            ],
+            "pageLength": 10,
+            "language": {
+                    "emptyTable":     "Tidak ada data.."
+                }
+ 
+            });
+        // Tabel Penduduk
+
+       
+
+            $('#update').click(function(){
+            $('#btnAdd').removeClass('hidden-div');
+            }); 
+
+
+        
+            // var koor = "{{ ppa.koor }}";
+            // var split = koor.split(',');
+            // var x = split[0];
+            // var y = split[1];
+      p = planit.new({
+
+        container: 'planit',
+        image: {
+          url: '{{base_url}}assets/img/skema.jpg',
+          zoom: true,
+        },
+        markers: [
+          // {
+          //   coords: [x,y],
+          //   infobox: {
+          //     html: "<h2>{{ ppa.namaBangunan }}</h2><p>{{ ppa.nama }}</p>",
+          //     position: 'top-left',
+              
+          //   },
+          //   class: "cheese bucket",
+          //   color: "#CEA052",
+          //   size: 40
+          // },
+        {% for ppa in ppa %}
+          {
+
+            coords: [{{ppa.koor}}],
+            draggable: false,
+            infobox: {
+              html: "<h2>{{ ppa.namaBangunan }}</h2><p>{{ ppa.nama }}</p>",
+              position: 'bottom-right',
+              arrow: true,
+              offsetX: -10,
+              offsetY: -10
+            }
+
+          },
+            {% endfor %}
+        ],
+
+        markerDragEnd: function(event, marker) {
+          console.log(marker.position());
+          // document.getElementById("koordinat").value = marker.position();
+          // console.log(marker.coords());
+        },
+        markerClick: function(event, marker) {
+          // console.log(marker.position());
+          p.centerOn(marker.position());
+          setTimeout(marker.showInfobox, 10);
+          // console.log(marker.position());
+        },
+        canvasClick: function(event, coords) {
+          // console.log(coords);
+          // console.log(marker.coords());
+          p.zoomTo(0);
+
+        }
+      });
+    
+        });
+
+
+
+    function deleteData(id)
+    {
+        if(confirm('Are you sure delete this data?'))
+        {
+            // ajax delete data to database
+            $.ajax({
+                url : "{{ base_url }}main/Ppa/deleteData/" + id,
+                type: "POST",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error deleting data');
+                }
+            });
+
+        }
+    }
+
+</script>
+    {% endblock %}

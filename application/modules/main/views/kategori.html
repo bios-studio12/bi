@@ -1,0 +1,289 @@
+{% extends "layout.html" %} {% block content %}{% include "slider.html" %}
+
+                <div class="container">
+                <div class="page-header category-page-header">
+                    <h2 class="page-title">New Books</h2>
+                    <p class="page-subtitle"></p>
+                </div><!-- /.page-header -->
+
+                <div class="page-body">
+                    <div class="row">
+                        <!-- ========================================= CONTENT ========================================= -->
+                        <div class="col-sm-8 col-sm-push-4">
+                            
+
+                            <div class="tab-content">
+                                <div class="tab-pane active  wow fadeInUp" id="grid" role="tabpanel">
+                                    <div class="category-books books grid-view">
+                                        <div class="row">
+
+
+                                                {% for data in data %}
+                                                <div class="col-md-4 col-sm-6">
+
+                                                    <div class="book">      
+                                                        <div class="book-cover">
+                                                            <div class="book-inner">
+                                                               <img src="{{base_url}}{{data.foto}}" width="193" height="261" alt="">
+                                                                <div class="fade"></div>
+                                                                <div class="book-price">
+
+                                                                    <span class="price">
+                                                                      {% if data.diskon %}
+                                                                <span class="price-before-discount">Rp. {{data.harga}} </span>
+                                                                {% endif %}
+                                                                Rp. {{data.totalHarga}}                     </span>
+                                                                    </div><!-- /.book-price -->
+
+                                                                    <div class="cart animate-effect">
+                                                                        <div class="action">
+                                                                            <a class="add-to-cart" href="javascript:void(0)" onclick="counter({{data.id}})" title="Add to Cart">
+                                                                                <i class="icon icon-plus fa fa-plus-circle"></i>
+                                                                            </a>
+                                                                            <a class="add-to-cart" href="#" title="Favourite">
+                                                                                <i class="icon icon-heart fa fa-heart"></i>
+                                                                            </a>
+                                                                        </div><!-- /.action -->
+                                                                    </div><!-- /.cart -->
+                                                                </div><!-- /.book-inner -->
+                                                            </div><!-- /.book-cover -->
+
+
+                                                            <div class="book-details">
+                                                                <h3 class="book-title"><a href="#">{{data.namaBuku}} </a></h3>
+                                                                <p class="book-author">{{data.namaPenulis}}</p>
+                                                                <div class="star-rating">
+                                                                    <i class="fa fa-star color"></i>
+                                                                    <i class="fa fa-star color"></i>
+                                                                    <i class="fa fa-star color"></i>
+                                                                    <i class="fa fa-star color"></i>
+                                                                    <i class="fa fa-star "></i>
+                                                                </div><!-- /.star-rating -->
+
+                                                            </div><!-- /.book-details -->
+                                                        </div><!-- /.book -->
+
+                                                    </div>
+                                                    {% endfor %}
+                                                    </div>
+                                                </div><!-- /.category-books -->
+                                            </div><!-- /.tab-pane -->
+
+
+                                        </div><!-- /.tab-content -->
+
+                                       {{page | raw}}
+                                    </div><!-- /.col -->
+
+                                    <!-- ========================================= CONTENT :END ========================================= -->
+
+                                    <!-- ========================================= SIDEBAR ========================================= -->
+                                    <div class="col-sm-4 col-sm-pull-8">
+                                        <aside class="sidebar">
+                                            <!-- ========================================= BOOK CATEGORY ========================================= -->
+                                            <section class="module">
+                                                <header class="module-header">
+                                                    <h4 class="module-book-category-title">Book Category</h4>
+                                                </header><!-- /.module-header -->
+
+                                                <div class="module-body category-module-body">
+                                                    <ul class="list-unstyled category-list">
+                                                       <!--  <li><a href="category.html">lorem ipsum</a></li>
+                                                        <li><a href="category.html">dolor sit amet</a></li> -->
+                                                        {% for kategori in kategori %}
+                                                        <li><a href="{{base_url}}main/Kategori/kategori/{{kategori.kategori}}">{{kategori.kategori}}</a></li>
+                                                        {% endfor %}
+                                                    </ul><!-- /.list-unstyled -->
+                                                </div><!-- /.module-body -->
+                                            </section><!-- /.module -->
+                                            <!-- ========================================= BOOK CATEGORY : END ========================================= -->                    </aside><!-- /.sidebar -->
+                                        </div><!-- /.col -->
+                                        <!-- ========================================= SIDEBAR :END ========================================= -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.page-body -->
+                            </div><!-- /.container -->
+
+                            <!-- ========================================= RELATE BOOKS MODULE ========================================= -->
+                            <div class="container">
+                                <div class="wow fadeInUp">
+                                    <div class="module block-relate-books module-block">
+                                        <div class="module-heading">
+                                            <h2 class="module-title">Relate Books</h2>
+                                            <div class="customNavigation">
+                                                <a href="#" data-target="#relate-book-carousel" class="btn btn-navigation left-nav-arrow owl-prev"><i class='icon fa fa-caret-left'></i></a>
+                                                <a href="#" data-target="#relate-book-carousel" class="btn btn-navigation right-nav-arrow owl-next"><i class='icon fa fa-caret-right'></i></a>  
+                                            </div><!-- /.customNavigation -->
+                                            <p class="module-subtitle"></p>
+                                        </div><!-- /.module-heading -->
+
+                                        <div class="module-body">
+                                            <div class="books">
+
+                                                <div id="relate-book-carousel" class="owl-carousel home-owl-carousel relate-books">
+
+                                                    {% for relate in relate %}
+                                                <div class="item item-carousel ">
+                                        
+                                                <div class="book">      
+                                                    <div class="sale-ribbon"><div class="sale-ribbon-content">Bst Saller</div></div>          <div class="book-cover">
+                                                    <div class="book-inner">
+                                                        <img src="{{base_url}}{{relate.foto}}" width="193" height="261" alt="">
+                                                        <div class="fade"></div>
+                                                        <div class="book-price">
+
+                                                            <span class="price">
+                                                                <!-- <span class="price-before-discount">$ 10.99</span> -->
+                                                                {% if relate.diskon %}
+                                                                <span class="price-before-discount">Rp. {{relate.harga}} </span>
+                                                                {% endif %}
+                                                                Rp. {{relate.totalHarga}}                     </span>
+                                                            </div><!-- /.book-price -->
+
+                                                            <div class="cart animate-effect">
+                                                                <div class="action">
+                                                                    <a class="add-to-cart" href="javascript:void(0)" onclick="counter({{relate.id}})" title="Add to Cart">
+                                                                        <i class="icon icon-plus fa fa-plus-circle"></i>
+                                                                    </a>
+                                                                    <a class="add-to-cart" href="#" title="Favourite">
+                                                                        <i class="icon icon-heart fa fa-heart"></i>
+                                                                    </a>
+                                                                </div><!-- /.action -->
+                                                            </div><!-- /.cart -->
+                                                        </div><!-- /.book-inner -->
+                                                    </div><!-- /.book-cover -->
+
+
+                                                    <div class="book-details">
+                                                        <h3 class="book-title"><a href="javascript:void(0)" onclick="counter({{relate.id}})">{{relate.namaBuku}}</a></h3>
+                                                        <p class="book-author">{{relate.namaPenulis}}</p>
+                                                        <div class="star-rating">
+                                                            <i class="fa fa-star color"></i>
+                                                            <i class="fa fa-star color"></i>
+                                                            <i class="fa fa-star color"></i>
+                                                            <i class="fa fa-star color"></i>
+                                                            <i class="fa fa-star "></i>
+                                                        </div><!-- /.star-rating -->
+
+                                                    </div><!-- /.book-details -->
+                                                </div><!-- /.book -->
+                                                
+                                    </div><!-- /.item -->
+                                {% endfor %}
+
+                                                </div><!-- /#relate-book-carousel -->                   
+                                            </div><!-- /.books -->
+                                        </div><!-- /.module-body -->
+                                    </div><!-- /.module -->
+                                </div><!-- /.row -->
+                            </div><!-- /.container -->
+                            <!-- ========================================= RELATE BOOKS MODULE : END ========================================= -->  
+                        </div><!-- /.category page -->
+
+                        <a class="scrollup hidden-xs hidden-sm" href="#" style="display: none;"><img src="{{base_url}}assets/user/images/top-scroll.png" alt="" ></a>
+                    </div>
+
+                    <div class="container">
+                        <!-- ============================================================= BRANDS ============================================================= -->
+                        <div class="row brands-block wow fadeInUp">
+                            <div class="col-md-12">
+                                <div class="page-header">
+                                    <h2 class="page-title">Brands</h2>
+                                    <p class="page-subtitle">DO eiusmod tempor incid... et dolore magna aliqua</p>
+                                </div><!-- /.page-header -->
+
+                                <div class="page-body">
+                                    <div id="owl-demo" class="owl-carousel brand-carousel">
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                        <div class="item desat">
+                                            <div class="brand-logo">
+                                                <h5>brand</h5>
+                                                <h4>logo</h4>
+                                            </div>
+                                        </div><!-- /.item -->
+
+                                    </div><!-- /#owl-demo -->           
+                                </div><!-- /.page-body -->
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                        <!-- ============================================================= BRANDS : END ============================================================= -->       
+                    </div><!-- /.container -->
+
+{% endblock %}
+{% block js %}
+
+<script type="text/javascript">
+    function counter(id)
+    {
+        
+            // ajax delete data to database
+            $.ajax({
+                url : "{{ base_url }}main/Id/getData/" + id,
+                type: "POST",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    window.location = "{{ base_url }}main/Id/detail/?id=" + id;
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error deleting data');
+                }
+            });
+
+        }
+    
+
+
+</script>
+
+
+
+ {% endblock %}
